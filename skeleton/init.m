@@ -8,7 +8,7 @@
 %           start_pose:     3X1
 function [S,R,Q,Lambda_psi] = init(bound,start_pose)
 M = 10000;
-part_bound = 10;
+part_bound = 20;
 if ~isempty(start_pose)
     S = [repmat(start_pose,1,M); 1/M*ones(1,M)];
 else

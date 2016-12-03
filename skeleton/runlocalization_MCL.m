@@ -87,6 +87,9 @@ sigma_save = s_sigma(:);
 %%
 % Main loop
 while 1
+%     if (count > 170)&(count < 250) 
+%         pause; 
+%     end
     count = count + 1;
     if count > length(flines)
         break;
