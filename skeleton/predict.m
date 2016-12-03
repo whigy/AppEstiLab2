@@ -10,4 +10,16 @@
 %           S_bar(t)            4XM
 function [S_bar] = predict(S,v,omega,R,delta_t)
 % FILL IN HERE
+M = size(S, 2);
+
+dx = v * delta_t * cos(S(3, :));
+dy = v * delta_t * sin(S(3, :));
+dtheta = ones(1, M) * omega * delta_t;
+dfix = zeros(1, M);
+u = [dx; dy; dtheta; dfix];
+
+%noise = [(randn(M, 3) * R)'; dfix];
+noise = [R * randn(3,M); dfix];
+
+S_bar = S + u + noise;
 end
