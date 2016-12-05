@@ -16,10 +16,9 @@ n = size(z, 2); % number of observations
 
 outlier = zeros(1, n);
 Psi = zeros(1, n, M);
-nu = zeros(n, 2, N, M);
+nu = zeros(2, N, M, n);
 %psi = zeros(n, N, M);
-psi = zeros(1, N);
-c = zeros(n, M);
+%c = zeros(n, M);
 
 z_hat = zeros(2, N, M);
 for k = 1 : N
@@ -29,17 +28,16 @@ end
 for i = 1 : n
     z_temp = repmat(z(:, i), 1, N * M);
     z_temp = reshape(z_temp, 2, N, M);
-    nu(i, :, :, :) = z_temp - z_hat;
+    nu(:, :, :, i) = z_temp - z_hat;
     %BE SURE THAT YOUR innovation 'nu' has its second component in [-pi, pi]
-    nu(i, 2, :, :) = mod(nu(i, 2, :, :) + pi, 2 * pi) - pi;
+    nu(2, :, :, i) = mod(nu(2, :, :, i) + pi, 2 * pi) - pi;
     for m = 1 : M
-        psi = (2 * pi * det(Q)^0.5)^-1 * exp(diag(-0.5 * nu(i, :, :, m)' / Q * nu(i, :, :, m)));
-        c(i, m) = find(psi == max(psi));
-        Psi(1, i, m) = max(psi);
+        psi = (2 * pi * det(Q)^0.5)^-1 * exp(diag(-0.5 * nu(:, :, m, i)' / Q * nu(:, :, m, i)));
+        %[max_psi,ind] = max(psi);
+        %c(i, m) = ind;
+        %Psi(1, i, m) = max_psi;
+        Psi(1, i, m) = psi(known_associations(i));
     end
     outlier(i) = logical(mean(Psi(:, i, :)) <= Lambda_psi);
 end
-
-% also notice that you have to do something here even if you do not have to maximize the likelihood.
-
 end

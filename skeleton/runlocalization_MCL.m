@@ -87,7 +87,7 @@ sigma_save = s_sigma(:);
 %%
 % Main loop
 while 1
-%     if (count > 170)&(count < 250) 
+%     if (count > 180)&(count < 200) 
 %         pause; 
 %     end
     count = count + 1;

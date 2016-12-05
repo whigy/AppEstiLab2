@@ -19,8 +19,8 @@ else
 end
 % Below here you may want to experiment with the values but these seem to work for most datasets.
 
-R = diag([1e-2 1e-2 1e-2]); %process noise covariance matrix
-Q = diag([1e-1;1e-1]); % measurement noise covariance matrix
+R = diag([1e-2 1e-2 1e-2])*10; %process noise covariance matrix
+Q = diag([1e-1;1e-1])*10; % measurement noise covariance matrix
 Lambda_psi = 0.0001;
 
 end

@@ -1,6 +1,16 @@
 clc
 clear
 
+%% Parameters to change:
+%init.m:
+%   M = 1000 / 10000;
+%   part_bound = 20;
+%   R = diag([1e-2 1e-2 1e-2]); %process noise covariance matrix
+%   Q = diag([1e-1;1e-1]);
+
+%mcl.m:
+%   multinomial/systematic re-sampling
+
 %% Dataset 1
 %runlocalization_MCL(simoutfile, mapfile,show_estimate,show_gth,show_odo,start_pose,verbose)
 runlocalization_MCL('so_sym2_nk.txt', 'map_sym2.txt', 1, 1, 1,[], 2);
@@ -11,6 +21,10 @@ runlocalization_MCL('so_sym2_nk.txt', 'map_sym2.txt', 1, 1, 1,[], 2);
 % mean error(x, y, theta)=(0.199023, -4.722965, 0.016452)
 % mean absolute error=(0.665087, 4.732941, 0.143695)
 % total_time =51.934639
+
+% mean error(x, y, theta)=(-0.170241, -0.227672, 0.052013)
+% mean absolute error=(0.198297, 0.273322, 0.065122)
+% total_time =47.419341
 % 
 % D1-10000 particles
 % mean error(x, y, theta)=(-0.539110, -0.721514, 0.051877)

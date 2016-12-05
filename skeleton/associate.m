@@ -26,9 +26,7 @@ for k = 1 : N
 end
 
 for i = 1 : n
-    z_temp = repmat(z(:, i), 1, N * M);
-    z_temp = reshape(z_temp, 2, N, M);
-    nu(:, :, :, i) = z_temp - z_hat;
+
     %BE SURE THAT YOUR innovation 'nu' has its second component in [-pi, pi]
     nu(2, :, :, i) = mod(nu(2, :, :, i) + pi, 2 * pi) - pi;
     for m = 1 : M
